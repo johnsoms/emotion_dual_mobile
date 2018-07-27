@@ -2,6 +2,7 @@ Android
 PlayerPath?
 /Users/Maxwell/Downloads/immersive-ed-1919aa86b207ab818dd3c71b637dff6e483f6c46/immersive-ed/max_ict_ar.apk
 SceneListBegin?
+Assets/QRScanner.unity
 Assets/DefaultScene.unity
 SceneListEnd?
 64daf6eb3069a4cbbd9708b8db248917 Assembly-CSharp.dll:DigitalRuby.WeatherMaker.WeatherMakerFullScreenFogProfileScript
@@ -220,6 +221,7 @@ d2a2bd333db22f480a8589e167314ecc Vuforia.UnityExtensions.dll:Vuforia.UserDefined
 05524b8f659e7bfe5756d1335fec24ba Vuforia.UnityExtensions.dll:Vuforia.WireframeTrackableEventHandler
 15bea26698002c6c4a3087131232ce5c Vuforia.UnityExtensions.dll:Vuforia.WordBehaviour
 7f15c62456a3b888d9b6a7d7bcbae95a Assembly-CSharp.dll:DigitalRuby.WeatherMaker.WeatherMakerExtensionCtsScript
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.QRUImanager
 8d8b382f06564235c0393f8ee71971c9 Assembly-CSharp.dll:DigitalRuby.WeatherMaker.WeatherMakerWeatherManagerScript
 26215f135eeb48d8fa1189498c107f6c Vuforia.UnityExtensions.dll:Vuforia.AnchorBehaviour
 0561521e336e270e6e5a9c61387cb838 Vuforia.UnityExtensions.dll:Vuforia.AnchorInputListenerBehaviour

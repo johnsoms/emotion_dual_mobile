@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{D1BFBCF8-E7EF-773C-01FB-FAC3D18B8BDB}</ProjectGuid>
+    <ProjectGuid>{3EEBB6E9-8818-5F76-75A5-BABE9FAC814D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
@@ -53,7 +53,7 @@
   <ItemGroup>
      <Compile Include="Assets\Plugins\SimpleJSON.cs" />
  <Reference Include="Facebook.Unity.Settings">
- <HintPath>/Users/Maxwell/Downloads/emotion_arcore-master 2/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
+ <HintPath>/Users/Maxwell/Downloads/emotion_arcore-master2/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
@@ -85,17 +85,20 @@
  <Reference Include="Vuforia.UnityExtensions">
  <HintPath>/Applications/Unity/PlaybackEngines/VuforiaSupport/Managed/Runtime/Vuforia.UnityExtensions.dll</HintPath>
  </Reference>
+ <Reference Include="zxing.unity">
+ <HintPath>/Users/Maxwell/Downloads/emotion_arcore-master2/Assets/zxing.unity.dll</HintPath>
+ </Reference>
  <Reference Include="TextMeshPro-2017.2-Runtime">
- <HintPath>/Users/Maxwell/Downloads/emotion_arcore-master 2/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.2-Runtime.dll</HintPath>
+ <HintPath>/Users/Maxwell/Downloads/emotion_arcore-master2/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.2-Runtime.dll</HintPath>
  </Reference>
  <Reference Include="TextMeshPro-2017.2-Editor">
- <HintPath>/Users/Maxwell/Downloads/emotion_arcore-master 2/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.2-Editor.dll</HintPath>
+ <HintPath>/Users/Maxwell/Downloads/emotion_arcore-master2/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.2-Editor.dll</HintPath>
  </Reference>
  <Reference Include="Newtonsoft.Json">
- <HintPath>/Users/Maxwell/Downloads/emotion_arcore-master 2/Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
+ <HintPath>/Users/Maxwell/Downloads/emotion_arcore-master2/Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="websocket-sharp">
- <HintPath>/Users/Maxwell/Downloads/emotion_arcore-master 2/Assets/Watson/unity-sdk-develop/Plugins/websocket-sharp.dll</HintPath>
+ <HintPath>/Users/Maxwell/Downloads/emotion_arcore-master2/Assets/Watson/unity-sdk-develop/Plugins/websocket-sharp.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Users/Maxwell/Library/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.13/UnityEngine.Analytics.dll</HintPath>
@@ -105,9 +108,6 @@
  </Reference>
  <Reference Include="UnityEngine.StandardEvents">
  <HintPath>/Users/Maxwell/Library/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
- </Reference>
- <Reference Include="zxing.unity">
- <HintPath>/Users/Maxwell/Downloads/emotion_arcore-master 2/Assets/zxing.unity.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

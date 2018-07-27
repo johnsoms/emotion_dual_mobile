@@ -107,7 +107,7 @@ public class UIManager : MonoBehaviour {
 		quadRenderer.material.mainTexture = camInputScript.Texture;
 		Vector3 scale = quadRenderer.transform.localScale;
 		Debug.Log (scale);
-		scale.x = 2*scale.x;
+		scale.x = -2*scale.x;
 		scale.y = -2 * scale.y;
 		quadRenderer.transform.localScale = scale;
 		// Initalize the colors
