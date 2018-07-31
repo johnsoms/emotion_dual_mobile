@@ -91,7 +91,6 @@ public class UIManager : MonoBehaviour {
 		gameManagerScript = (GameManager) gameManagerObject.GetComponent(typeof(GameManager));
 		camInputScript = (Affdex.CameraInput) inputDeviceCamera.GetComponent<Affdex.CameraInput>();
 		camInputScript2 = (Affdex2.CameraInput) inputDeviceCamera.GetComponent<Affdex2.CameraInput>();
-		//planeRenderer = (Renderer) webcamRenderPlane.GetComponent<Renderer>();
 		quadRenderer = webcamRenderQuad.GetComponent<Renderer> ();
 		// Camera feed parameters
 		if (camInputScript.Texture == null) {

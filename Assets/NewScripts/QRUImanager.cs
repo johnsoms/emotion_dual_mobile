@@ -7,7 +7,8 @@ using ZXing;
 using ZXing.QrCode;
 public class QRUImanager : MonoBehaviour {
 	
-
+	private int scanRate = 10;
+	private int scan = 0;
 	private WebCamTexture camTexture;
 	private Rect screenRect;
 	void Start() {
@@ -21,21 +22,25 @@ public class QRUImanager : MonoBehaviour {
 	}
 
 	void OnGUI () {
+		print ("OnGUI");
 		// drawing the camera on screen
 		GUI.DrawTexture (screenRect, camTexture, ScaleMode.ScaleToFit);
 		// do the reading — you might want to attempt to read less often than you draw on the screen for performance sake
-		try {
-			IBarcodeReader barcodeReader = new BarcodeReader ();
-			// decode the current frame
-			var result = barcodeReader.Decode(camTexture.GetPixels32(),
-				camTexture.width, camTexture.height);
-			if (result != null) {
-				Debug.Log("DECODED TEXT FROM QR: " + result.Text);
-				PlayerPrefs.SetString("sourceURL",result.Text);
-				SceneManager.LoadSceneAsync("DefaultScene", LoadSceneMode.Single);
+		if (scan % scanRate == 0) {
+			try {
+				IBarcodeReader barcodeReader = new BarcodeReader ();
+				// decode the current frame
+				var result = barcodeReader.Decode (camTexture.GetPixels32 (),
+					            camTexture.width, camTexture.height);
+				if (result != null) {
+//				Debug.Log("DECODED TEXT FROM QR: " + result.Text);
+					PlayerPrefs.SetString ("sourceURL", result.Text);
+					SceneManager.LoadSceneAsync ("DefaultScene", LoadSceneMode.Single);
+				}
+			} catch (Exception ex) { 
+
 			}
-		} catch(Exception ex) { 
-//			Debug.LogWarning (ex.Message); 
 		}
+		scan++;
 	}
 }
