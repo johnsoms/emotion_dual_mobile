@@ -24,6 +24,11 @@ public class UIManager : MonoBehaviour {
 	public Text SpeechToText;
 	private Affdex.CameraInput camInputScript;
 	private Affdex2.CameraInput camInputScript2;
+//	public FaceController faceMap;
+	public GameObject leftEyebrow;
+	public GameObject rightEyebrow;
+	private float currentLeftRotation;
+	private float currentRightRotation;
 	//private Renderer planeRenderer;
 	public Material joy1;
 	public Material joy2;
@@ -99,6 +104,8 @@ public class UIManager : MonoBehaviour {
 			feedHeight = camInputScript.targetHeight;
 			camReady = false;
 		}
+		currentLeftRotation = 0f;
+		currentRightRotation = 0f;
 
 		SetFeed ();
 
@@ -145,6 +152,32 @@ public class UIManager : MonoBehaviour {
 			
 	}
 
+	public void applyEyebrow(float raisePercentage, float furrowPercentage, float innerPercentage){
+		Vector3 newLeftEyebrowPos = new Vector3 (leftEyebrow.transform.localPosition.x, leftEyebrow.transform.localPosition.y, -0.25f - 0.08f * raisePercentage/100f);
+		Vector3 newRightEyebrowPos = new Vector3 (rightEyebrow.transform.localPosition.x, rightEyebrow.transform.localPosition.y, -0.25f - 0.08f * raisePercentage/100f);
+		leftEyebrow.transform.localPosition = newLeftEyebrowPos;
+		rightEyebrow.transform.localPosition = newRightEyebrowPos;
+		if (innerPercentage > furrowPercentage) {
+			print ( -30.0f * innerPercentage/100f - currentLeftRotation);
+			print (30.0f * innerPercentage / 100f - currentRightRotation);
+			leftEyebrow.transform.Rotate (new Vector3(0f, -30.0f * innerPercentage/100f - currentLeftRotation, 0f));
+			rightEyebrow.transform.Rotate (new Vector3 (0f, 30.0f * innerPercentage/100f - currentRightRotation, 0f));
+			currentLeftRotation = -30.0f * innerPercentage/100f;
+			currentRightRotation = 30.0f * innerPercentage/100f;
+			print ("CURRENT LEFT: " + currentLeftRotation);
+			print ("CURRENT RIGHT: " + currentRightRotation);
+		} else if (furrowPercentage > innerPercentage) {
+			print ( 30.0f * furrowPercentage/100f - currentLeftRotation);
+			print (-30.0f * furrowPercentage / 100f - currentRightRotation);
+			leftEyebrow.transform.Rotate (new Vector3(0f, 30.0f * furrowPercentage/100f - currentLeftRotation, 0f));
+			rightEyebrow.transform.Rotate (new Vector3(0f, -30.0f * furrowPercentage/100f - currentRightRotation, 0f));
+			currentLeftRotation = 30.0f * furrowPercentage/100f;
+			currentRightRotation = -30.0f * furrowPercentage/100f;
+			print ("CURRENT LEFT: " + currentLeftRotation);
+			print ("CURRENT RIGHT: " + currentRightRotation);
+		}
+	}
+
 	private IEnumerator RequestEmotionUpdate()
 	{
 		// Debug.Log("Entered REQUEST EMOTION UPDATE COROUTINE.");
@@ -157,8 +190,9 @@ public class UIManager : MonoBehaviour {
 				FACSStruct currentFACS = gameManagerScript.getCurrentFACS ();
 				FACSStruct currentFACS2 = gameManagerScript.getCurrentFACS2 ();
 //				FacialEmotionText.text = "Joy: " + currentEmotions.joy + "\nAnger: " + currentEmotions.anger + "\nFear: " + currentEmotions.fear + "\nDisgust: " + currentEmotions.disgust + "\nSadness: " + currentEmotions.sadness + "\nContempt: " + currentEmotions.contempt + "\nValence: " + currentEmotions.valence + "\nEngagement: " + currentEmotions.engagement;
-				FACSText.text = "Attention: " + currentFACS.Attention + "\nBrowFurrow: " + currentFACS.BrowFurrow + "\nBrowRaise: " + currentFACS.BrowRaise + "\nChinRaise: " + currentFACS.ChinRaiser + "\nEyeClose: " + currentFACS.EyeClosure + "\nInnerEyebrowRaise: " + currentFACS.InnerEyeBrowRaise + "\nLipCornerDepress: " + currentFACS.LipCornerDepressor + "\nLipPress: " + currentFACS.LipPress + "\nLipPucker: " + currentFACS.LipPucker + "\nLipSuck: " + currentFACS.LipSuck + "\nMouthOpen: " + currentFACS.MouthOpen + "\nNoseWrinkle: " + currentFACS.NoseWrinkler + "\nSmile: " + currentFACS.Smile + "\nSmirk: " + currentFACS.Smirk + "\nUpperLipRaise" + currentFACS.UpperLipRaiser;
+				FACSText.text = "Attention: " + currentFACS2.Attention + "\nBrowFurrow: " + currentFACS2.BrowFurrow + "\nBrowRaise: " + currentFACS2.BrowRaise + "\nChinRaise: " + currentFACS2.ChinRaiser + "\nEyeClose: " + currentFACS2.EyeClosure + "\nInnerEyebrowRaise: " + currentFACS2.InnerEyeBrowRaise + "\nLipCornerDepress: " + currentFACS2.LipCornerDepressor + "\nLipPress: " + currentFACS2.LipPress + "\nLipPucker: " + currentFACS2.LipPucker + "\nLipSuck: " + currentFACS2.LipSuck + "\nMouthOpen: " + currentFACS2.MouthOpen + "\nNoseWrinkle: " + currentFACS2.NoseWrinkler + "\nSmile: " + currentFACS2.Smile + "\nSmirk: " + currentFACS2.Smirk + "\nUpperLipRaise" + currentFACS2.UpperLipRaiser;
 				// Update facial emotion colors
+				applyEyebrow(currentFACS2.BrowRaise, currentFACS2.BrowFurrow, currentFACS2.InnerEyeBrowRaise);
 				if (gameManagerScript.useAugmentedBasicEmotions) {
 					currentValue = (currentEmotions.valence + 175f) / 300f;
 					currentValue2 = (currentEmotions.valence + 175f) / 300f;

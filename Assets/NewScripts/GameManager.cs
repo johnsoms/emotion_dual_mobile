@@ -150,7 +150,7 @@ public class GameManager : MonoBehaviour {
 			currentFacialEmotion2 = facialAnalyzer2.getCurrentEmotions();
 //			print (currentFacialEmotion2.joy);
 			currentFACS = facialAnalyzer.getCurrentFACS ();
-//			currentFACS2 = facialAnalyzer2.getCurrentFACS ();
+			currentFACS2 = facialAnalyzer2.getCurrentFACS ();
 			// Debug.Log("got facial emotion struct");
 		}
 			

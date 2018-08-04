@@ -226,6 +226,17 @@
      <Compile Include="Assets\NewScripts\ToneAnalysis.cs" />
      <Compile Include="Assets\NewScripts\UIManager.cs" />
      <Compile Include="Assets\NewScripts\WavUtility.cs" />
+     <Compile Include="Assets\SplineMesh\Scripts\Bezier\CubicBezierCurve.cs" />
+     <Compile Include="Assets\SplineMesh\Scripts\Bezier\MeshBender.cs" />
+     <Compile Include="Assets\SplineMesh\Scripts\Bezier\Spline.cs" />
+     <Compile Include="Assets\SplineMesh\Scripts\Bezier\SplineNode.cs" />
+     <Compile Include="Assets\SplineMesh\Scripts\Exemple\ExempleFollowSpline.cs" />
+     <Compile Include="Assets\SplineMesh\Scripts\Exemple\ExemplePipe.cs" />
+     <Compile Include="Assets\SplineMesh\Scripts\Exemple\ExempleRailling.cs" />
+     <Compile Include="Assets\SplineMesh\Scripts\Exemple\ExempleSower.cs" />
+     <Compile Include="Assets\SplineMesh\Scripts\Exemple\ExempleTentacle.cs" />
+     <Compile Include="Assets\SplineMesh\Scripts\Exemple\MouthLine.cs" />
+     <Compile Include="Assets\SplineMesh\Scripts\Exemple\SplineExtrusion.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
@@ -534,6 +545,7 @@
      <None Include="Assets\WeatherMaker\Demo\DemoResources\TurbulenceLibrary\Resources\NoiseShaderTemplate.txt" />
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
      <None Include="Assets\StreamingAssets\affdex-data-3\README.txt" />
+     <None Include="Assets\SplineMesh\Doc.txt" />
      <None Include="Assets\WeatherMaker\Prefab\Shaders\WeatherMakerOverlayShader.cginc" />
      <None Include="Assets\WeatherMaker\Demo\DemoResources\TurbulenceLibrary\Readme.txt" />
      <None Include="Assets\WeatherMaker\Readme.txt" />

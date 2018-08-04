@@ -61,6 +61,8 @@
      <Compile Include="Assets\GoogleARCore\SDK\Scripts\Editor\BackgroundJobExecutor.cs" />
      <Compile Include="Assets\GoogleARCore\SDK\Scripts\Editor\CloudAnchorPreprocessBuild.cs" />
      <Compile Include="Assets\GoogleARCore\SDK\Scripts\Editor\RequiredOptionalPreprocessBuild.cs" />
+     <Compile Include="Assets\SplineMesh\Scripts\Editor\SplineEditor.cs" />
+     <Compile Include="Assets\SplineMesh\Scripts\Editor\SplineExtrusionEditor.cs" />
      <Compile Include="Assets\Watson\unity-sdk-develop\Scripts\Editor\WatsonMenu.cs" />
      <Compile Include="Assets\Watson\unity-sdk-develop\ThirdParty\FullSerializer\Aot\Editor\fsAotConfigurationEditor.cs" />
      <Compile Include="Assets\Watson\unity-sdk-develop\ThirdParty\FullSerializer\Editor\AotHelpers.cs" />

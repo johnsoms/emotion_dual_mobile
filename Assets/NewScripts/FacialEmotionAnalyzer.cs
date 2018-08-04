@@ -9,6 +9,7 @@ public class FacialEmotionAnalyzer : ImageResultsListener {
 	private EmotionStruct currentEmotions;	// The cumulative current emotions over the past 10 second window
 	private Vector4 moodTrackerParameters;
 	private ArrayList emotionWindow;
+	private ArrayList facsWindow;
 	private int frameSampleCount = 0;
 	private int frameSampleRate = 20;
 	private FACSStruct currentFACS;
@@ -84,21 +85,22 @@ public class FacialEmotionAnalyzer : ImageResultsListener {
 				face.Emotions.TryGetValue(Emotions.Valence, out nextEmotion.valence);
 				face.Emotions.TryGetValue(Emotions.Engagement, out nextEmotion.engagement);
 				// Retrieve FACS values
-				face.Expressions.TryGetValue(Expressions.Smile, out currentFACS.Smile);
-				face.Expressions.TryGetValue(Expressions.InnerBrowRaise, out currentFACS.InnerEyeBrowRaise);
-				face.Expressions.TryGetValue(Expressions.BrowRaise, out currentFACS.BrowRaise);
-				face.Expressions.TryGetValue(Expressions.BrowFurrow, out currentFACS.BrowFurrow);
-				face.Expressions.TryGetValue(Expressions.NoseWrinkle, out currentFACS.NoseWrinkler);
-				face.Expressions.TryGetValue(Expressions.UpperLipRaise, out currentFACS.UpperLipRaiser);
-				face.Expressions.TryGetValue(Expressions.LipCornerDepressor, out currentFACS.LipCornerDepressor);
-				face.Expressions.TryGetValue(Expressions.ChinRaise, out currentFACS.ChinRaiser);
-				face.Expressions.TryGetValue(Expressions.LipPucker, out currentFACS.LipPucker);
-				face.Expressions.TryGetValue(Expressions.LipPress, out currentFACS.LipPress);
-				face.Expressions.TryGetValue(Expressions.LipSuck, out currentFACS.LipSuck);
-				face.Expressions.TryGetValue(Expressions.MouthOpen, out currentFACS.MouthOpen);
-				face.Expressions.TryGetValue(Expressions.Smirk, out currentFACS.Smirk);
-				face.Expressions.TryGetValue(Expressions.EyeClosure, out currentFACS.EyeClosure);
-				face.Expressions.TryGetValue(Expressions.Attention, out currentFACS.Attention);
+				FACSStruct nextFACS = new FACSStruct();
+				face.Expressions.TryGetValue(Expressions.Smile, out nextFACS.Smile);
+				face.Expressions.TryGetValue(Expressions.InnerBrowRaise, out nextFACS.InnerEyeBrowRaise);
+				face.Expressions.TryGetValue(Expressions.BrowRaise, out nextFACS.BrowRaise);
+				face.Expressions.TryGetValue(Expressions.BrowFurrow, out nextFACS.BrowFurrow);
+				face.Expressions.TryGetValue(Expressions.NoseWrinkle, out nextFACS.NoseWrinkler);
+				face.Expressions.TryGetValue(Expressions.UpperLipRaise, out nextFACS.UpperLipRaiser);
+				face.Expressions.TryGetValue(Expressions.LipCornerDepressor, out nextFACS.LipCornerDepressor);
+				face.Expressions.TryGetValue(Expressions.ChinRaise, out nextFACS.ChinRaiser);
+				face.Expressions.TryGetValue(Expressions.LipPucker, out nextFACS.LipPucker);
+				face.Expressions.TryGetValue(Expressions.LipPress, out nextFACS.LipPress);
+				face.Expressions.TryGetValue(Expressions.LipSuck, out nextFACS.LipSuck);
+				face.Expressions.TryGetValue(Expressions.MouthOpen, out nextFACS.MouthOpen);
+				face.Expressions.TryGetValue(Expressions.Smirk, out nextFACS.Smirk);
+				face.Expressions.TryGetValue(Expressions.EyeClosure, out nextFACS.EyeClosure);
+				face.Expressions.TryGetValue(Expressions.Attention, out nextFACS.Attention);
 				//Not considering surprise or disgust for now
 //				nextEmotion.surprise = 0f;
 //				nextEmotion.disgust = 0f;
@@ -121,6 +123,23 @@ public class FacialEmotionAnalyzer : ImageResultsListener {
 				{
 					// add the next element
 					emotionWindow.Add (nextEmotion);
+				}
+
+				if (facsWindow.Count == 4)
+				{
+					// add the tenth analysis to complete the window
+					facsWindow.Add(nextFACS);
+
+					// calculate the currentEmotions for this window and assign the parameter
+					calculateCurrentFACS();
+
+					// shift the window back to prepare for the next emotion data
+					facsWindow.RemoveAt(0);
+				}
+				else
+				{
+					// add the next element
+					facsWindow.Add (nextEmotion);
 				}
 			}
 			
@@ -189,6 +208,61 @@ public class FacialEmotionAnalyzer : ImageResultsListener {
 		else
 		{
 			currentEmotions = new EmotionStruct();
+		}
+
+		// Debug.Log("emotion window count: " + emotionWindow.Count);
+		// Debug.Log("facial anger" + currentEmotions.anger);
+		// Debug.Log("facial joy" + currentEmotions.joy);
+		// Debug.Log("facial fear" + currentEmotions.fear);
+		// Debug.Log("facial sadness" + currentEmotions.sadness);
+		// Debug.Log("facial disgust" + currentEmotions.disgust);
+		// Debug.Log("facial surprise" + currentEmotions.surprise);
+	}
+
+	private void calculateCurrentFACS()
+	{
+		if (facsWindow.Count > 0)
+		{
+			FACSStruct facsSum = new FACSStruct();
+			foreach (FACSStruct f in facsWindow)
+			{
+				facsSum.Smile += f.Smile;
+				facsSum.InnerEyeBrowRaise += f.InnerEyeBrowRaise;
+				facsSum.BrowRaise += f.BrowRaise;
+				facsSum.BrowFurrow += f.BrowFurrow;
+				facsSum.NoseWrinkler += f.NoseWrinkler;
+				facsSum.UpperLipRaiser += f.UpperLipRaiser;
+				facsSum.LipCornerDepressor += f.LipCornerDepressor;
+				facsSum.ChinRaiser += f.ChinRaiser;
+				facsSum.LipPucker += f.LipPucker;
+				facsSum.LipPress += f.LipPress;
+				facsSum.LipSuck += f.LipSuck;
+				facsSum.MouthOpen += f.MouthOpen;
+				facsSum.Smirk += f.Smirk;
+				facsSum.EyeClosure += f.EyeClosure;
+				facsSum.Attention += f.Attention;
+			}
+
+			currentFACS.Smile = facsSum.Smile / (float) facsWindow.Count;
+			currentFACS.InnerEyeBrowRaise = facsSum.InnerEyeBrowRaise / (float) facsWindow.Count;
+			currentFACS.BrowRaise = facsSum.BrowRaise / (float) facsWindow.Count;
+			currentFACS.BrowFurrow = facsSum.BrowFurrow / (float) facsWindow.Count;
+			currentFACS.NoseWrinkler = facsSum.NoseWrinkler / (float) facsWindow.Count;
+			currentFACS.UpperLipRaiser = facsSum.UpperLipRaiser / (float) facsWindow.Count;
+			currentFACS.LipCornerDepressor = facsSum.LipCornerDepressor / (float) facsWindow.Count;
+			currentFACS.ChinRaiser = facsSum.ChinRaiser / (float) facsWindow.Count;
+			currentFACS.LipPucker = facsSum.LipPucker / (float) facsWindow.Count;
+			currentFACS.LipPress = facsSum.LipPress / (float) facsWindow.Count;
+			currentFACS.LipSuck = facsSum.LipSuck / (float) facsWindow.Count;
+			currentFACS.MouthOpen = facsSum.MouthOpen / (float) facsWindow.Count;
+			currentFACS.Smirk = facsSum.Smirk / (float) facsWindow.Count;
+			currentFACS.EyeClosure = facsSum.EyeClosure / (float) facsWindow.Count;
+			currentFACS.Attention = facsSum.Attention / (float) facsWindow.Count;
+
+		}
+		else
+		{
+			currentFACS = new FACSStruct();
 		}
 
 		// Debug.Log("emotion window count: " + emotionWindow.Count);
